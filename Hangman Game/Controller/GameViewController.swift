@@ -67,7 +67,6 @@ class GameViewController: UIViewController, GameProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Set up background image first
         setupBackgroundImage()
         
         title = K.appName
@@ -90,11 +89,13 @@ class GameViewController: UIViewController, GameProtocol {
     
     
     @IBAction func letterTapped(_ sender: UIButton) {
+        print("Letter tapped: \(sender.currentTitle ?? "unknown")")  // Add this debug line
+        
         guard let letterChosen = sender.currentTitle?.lowercased() else { return }
         
         usedLetters.append(letterChosen)
         
-        // Recognize all letters in "prototype"
+        // Simplified for prototype - recognize all letters in "prototype"
         if wordLetterArray.contains(letterChosen) {
             // Show the letter in all positions where it appears
             for (index, letter) in wordLetterArray.enumerated() {
@@ -120,11 +121,8 @@ class GameViewController: UIViewController, GameProtocol {
         sender.setTitleColor(UIColor(named: K.Colours.buttonColour), for: .disabled)
         wordLabel.text = maskedWord
         
-        // Always stop at a certain point to prevent game from ending
-        if hangmanImgNumber >= 5 {
-            livesRemaining = 5
-            hangmanImgNumber = 5
-        }
+        // For debugging
+        print("Updated masked word: \(maskedWord)")
     }
     
     
@@ -180,7 +178,9 @@ class GameViewController: UIViewController, GameProtocol {
     
     for button in letterButtons {
         button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 24.0)
-        button.setTitleColor(UIColor.black, for: .normal) // Changed to black
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.isEnabled = true  // Explicitly enable the buttons
+        button.alpha = 1.0  // Make sure they're fully visible
     }
 }
 
@@ -189,9 +189,19 @@ class GameViewController: UIViewController, GameProtocol {
         // Create background image view
         backgroundImageView = UIImageView(frame: view.bounds)
         backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.image = UIImage(named: "game_background") // Replace with your image name
+        
+        if let image = UIImage(named: "game_background") {
+            backgroundImageView.image = image
+        } else {
+            print("Warning: game_background image not found")
+            backgroundImageView.backgroundColor = UIColor.lightGray
+        }
+        
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(backgroundImageView, at: 0) // Add at the back
+        
+        // Important: make sure background doesn't intercept touches
+        backgroundImageView.isUserInteractionEnabled = false
         
         // Set constraints
         NSLayoutConstraint.activate([
