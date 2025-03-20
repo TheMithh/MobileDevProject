@@ -65,7 +65,7 @@ class SettingsViewController: UIViewController {
     private func formatUI() {
         view.backgroundColor = UIColor(named: K.Colours.bgColour)
         soundFXLabel.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
-        soundFXLabel.textColor = UIColor(named: K.Colours.labelColour)
+        soundFXLabel.textColor = UIColor.black // Changed to black
         
         soundFXSwitch.onTintColor = UIColor(named: K.Colours.buttonColour)
         soundFXSwitch.tintColor = UIColor(named: K.Colours.buttonColour)

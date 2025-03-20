@@ -39,8 +39,8 @@ class HowToPlayTableViewController: UITableViewController {
         
         cell.textLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
         cell.detailTextLabel?.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
-        cell.textLabel?.textColor = UIColor(named: K.Colours.labelColour)
-        cell.detailTextLabel?.textColor = UIColor(named: K.Colours.labelColour)
+        cell.textLabel?.textColor = UIColor.black // Changed to black
+        cell.detailTextLabel?.textColor = UIColor.black // Changed to black
         
         cell.textLabel?.text = rulesTitle[indexPath.row]
         cell.detailTextLabel?.text = rules[indexPath.row]
@@ -55,4 +55,6 @@ class HowToPlayTableViewController: UITableViewController {
         Vibration.light.vibrate()
         performSegue(withIdentifier: K.gameSeugue, sender: self)
     }
+
+
 }

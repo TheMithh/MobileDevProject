@@ -18,6 +18,7 @@ class WelcomeViewController: UIViewController {
     @IBOutlet weak var settingsBtn: UIButton!
     @IBOutlet weak var howToPlayBtn: UIButton!
     @IBOutlet weak var leaderboardBtn: UIButton!
+    private var backgroundImageView: UIImageView!
     
     var player: AVAudioPlayer?
     
@@ -47,6 +48,8 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        setupBackgroundImage()
         
         formatUI()
         animateViewController()
@@ -77,6 +80,23 @@ class WelcomeViewController: UIViewController {
         
         buttonClicked = true
     }
+
+
+    private func setupBackgroundImage() {
+        // Create background image view
+        backgroundImageView = UIImageView(frame: view.bounds)
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.image = UIImage(named: "game_background") // Replace with your image name
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(backgroundImageView, at: 0) // Add at the back
+        
+        // Set constraints
+        NSLayoutConstraint.activate([
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+    ])
     
     @IBAction func settingsBtnPressed(_ sender: UIButton) {
         sender.pulsateBtn()
@@ -136,26 +156,28 @@ class WelcomeViewController: UIViewController {
         howToPlayBtn.fadeInBtn(duration: 1.0)
     }
     
-    private func formatUI() {
-        view.backgroundColor = UIColor(named: K.Colours.bgColour)
-        
-        titleLabel.textColor = UIColor(named: K.Colours.labelColour)
-        titleLabel.layer.shadowColor = UIColor.white.cgColor
-        titleLabel.layer.shadowOffset = .zero
-        titleLabel.layer.shadowRadius = 2.0
-        titleLabel.layer.shadowOpacity = 1.0
-        titleLabel.layer.masksToBounds = false
-        titleLabel.layer.shouldRasterize = true
-        titleLabel.font = UIFont(name: K.Fonts.retroGaming, size: 46.0)
-        
-        totalScoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 22)
-        totalScoreLabel.textColor = UIColor(named: K.Colours.labelColour)
-        
-        let buttons: [UIButton] = [playBtn, settingsBtn, howToPlayBtn, leaderboardBtn]
-        
-        buttons.forEach { button in
-            button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
-            button.setTitleColor(UIColor(named: K.Colours.labelColour), for: .normal)
-        }
+private func formatUI() {
+    view.backgroundColor = UIColor(named: K.Colours.bgColour)
+    
+    // Change from white to black
+    titleLabel.textColor = UIColor.black
+    titleLabel.layer.shadowColor = UIColor.lightGray.cgColor // Changed shadow color for better visibility
+    titleLabel.layer.shadowOffset = .zero
+    titleLabel.layer.shadowRadius = 2.0
+    titleLabel.layer.shadowOpacity = 1.0
+    titleLabel.layer.masksToBounds = false
+    titleLabel.layer.shouldRasterize = true
+    titleLabel.font = UIFont(name: K.Fonts.retroGaming, size: 46.0)
+    
+    // Change from white to black
+    totalScoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 22)
+    totalScoreLabel.textColor = UIColor.black
+    
+    let buttons: [UIButton] = [playBtn, settingsBtn, howToPlayBtn, leaderboardBtn]
+    
+    buttons.forEach { button in
+        button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
+        // Change from white to black
+        button.setTitleColor(UIColor.black, for: .normal)
     }
 }

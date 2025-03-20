@@ -24,14 +24,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         // Disabled for prototype
     }
     
-    func setUpNavBarFormatting() {
-        UINavigationBar.appearance().barTintColor = UIColor(named: K.Colours.bgColour)
-        UINavigationBar.appearance().tintColor = UIColor(named: K.Colours.buttonColour)
-        UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.white,
-                                                            NSAttributedString.Key.font: UIFont(name: K.Fonts.retroGaming, size: 22.0)!]
-        UINavigationBar.appearance().isTranslucent = false
-        UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: K.Fonts.retroGaming, size: 15.0)!], for: .normal)
-    }
+func setUpNavBarFormatting() {
+    UINavigationBar.appearance().barTintColor = UIColor(named: K.Colours.bgColour)
+    UINavigationBar.appearance().tintColor = UIColor(named: K.Colours.buttonColour)
+    // Change text color to black
+    UINavigationBar.appearance().titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black,
+                                                        NSAttributedString.Key.font: UIFont(name: K.Fonts.retroGaming, size: 22.0)!]
+    UINavigationBar.appearance().isTranslucent = false
+    UIBarButtonItem.appearance().setTitleTextAttributes([NSAttributedString.Key.font: UIFont(name: K.Fonts.retroGaming, size: 15.0)!], for: .normal)
+}
     
     // MARK: UISceneSession Lifecycle
     

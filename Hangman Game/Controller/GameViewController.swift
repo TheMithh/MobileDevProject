@@ -14,6 +14,7 @@ class GameViewController: UIViewController, GameProtocol {
     @IBOutlet weak var guessesRemainingLabel: UILabel!
     @IBOutlet var letterButtons: [UIButton]!
     var player: AVAudioPlayer?
+    private var backgroundImageView: UIImageView!
     
     let defaults = UserDefaults.standard
     var totalScore = 0 {
@@ -65,6 +66,9 @@ class GameViewController: UIViewController, GameProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set up background image first
+        setupBackgroundImage()
         
         title = K.appName
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Clue", style: .plain, target: self, action: #selector(giveClue))
@@ -162,20 +166,39 @@ class GameViewController: UIViewController, GameProtocol {
     }
     
     private func formatUI(){
-        view.backgroundColor = UIColor(named: K.Colours.bgColour)
-        
-        hangmanImgView.image = UIImage(named: "\(K.hangmanImg)\(hangmanImgNumber)")
-        scoreLabel.text = "0 points"
-        scoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
-        scoreLabel.textColor = UIColor(named: K.Colours.bgColour)
-        scoreLabel.backgroundColor = UIColor(named: K.Colours.highlightColour)
-        guessesRemainingLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
-        wordLabel.font = UIFont(name: K.Fonts.retroGaming, size: 36.0)
-        
-        for button in letterButtons {
-            button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 24.0)
-            button.setTitleColor(UIColor(named: K.Colours.labelColour), for: .normal)
-        }
-    }
+    view.backgroundColor = UIColor(named: K.Colours.bgColour)
     
+    hangmanImgView.image = UIImage(named: "\(K.hangmanImg)\(hangmanImgNumber)")
+    scoreLabel.text = "0 points"
+    scoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
+    scoreLabel.textColor = UIColor.black // Changed to black
+    scoreLabel.backgroundColor = UIColor(named: K.Colours.highlightColour)
+    guessesRemainingLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
+    guessesRemainingLabel.textColor = UIColor.black // Changed to black
+    wordLabel.font = UIFont(name: K.Fonts.retroGaming, size: 36.0)
+    wordLabel.textColor = UIColor.black // Added to ensure word is black
+    
+    for button in letterButtons {
+        button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 24.0)
+        button.setTitleColor(UIColor.black, for: .normal) // Changed to black
+    }
+}
+
+    
+    private func setupBackgroundImage() {
+        // Create background image view
+        backgroundImageView = UIImageView(frame: view.bounds)
+        backgroundImageView.contentMode = .scaleAspectFill
+        backgroundImageView.image = UIImage(named: "game_background") // Replace with your image name
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.insertSubview(backgroundImageView, at: 0) // Add at the back
+        
+        // Set constraints
+        NSLayoutConstraint.activate([
+            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+        ])
+    }
 }
