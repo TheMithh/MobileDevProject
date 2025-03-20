@@ -48,12 +48,20 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupBackgroundImage()
         
+        setupBackgroundImage()
         formatUI()
         animateViewController()
+        
+        // Darken the hangman image (logoImg)
+        if let logo = logoImg.image {
+            // Change the image to use the template rendering mode
+            logoImg.image = logo.withRenderingMode(.alwaysTemplate)
+            // Set the tint color to black (or another dark color)
+            logoImg.tintColor = UIColor.black
+        }
     }
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle  {
         .lightContent
