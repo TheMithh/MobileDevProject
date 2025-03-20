@@ -33,6 +33,10 @@ class HowToPlayTableViewController: UITableViewController {
         self.navigationItem.title = " "
     }
     
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return rules.count
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.rulesCellName, for: indexPath)
         
@@ -43,19 +47,6 @@ class HowToPlayTableViewController: UITableViewController {
         
         // Make cell background transparent
         cell.backgroundColor = UIColor.clear
-        
-        cell.textLabel?.text = rulesTitle[indexPath.row]
-        cell.detailTextLabel?.text = rules[indexPath.row]
-        return cell
-    }
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: K.rulesCellName, for: indexPath)
-        
-        cell.textLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
-        cell.detailTextLabel?.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
-        cell.textLabel?.textColor = UIColor.black // Changed to black
-        cell.detailTextLabel?.textColor = UIColor.black // Changed to black
         
         cell.textLabel?.text = rulesTitle[indexPath.row]
         cell.detailTextLabel?.text = rules[indexPath.row]
