@@ -96,7 +96,8 @@ class WelcomeViewController: UIViewController {
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-    ])
+        ])
+    }
     
     @IBAction func settingsBtnPressed(_ sender: UIButton) {
         sender.pulsateBtn()
@@ -156,28 +157,29 @@ class WelcomeViewController: UIViewController {
         howToPlayBtn.fadeInBtn(duration: 1.0)
     }
     
-private func formatUI() {
-    view.backgroundColor = UIColor(named: K.Colours.bgColour)
-    
-    // Change from white to black
-    titleLabel.textColor = UIColor.black
-    titleLabel.layer.shadowColor = UIColor.lightGray.cgColor // Changed shadow color for better visibility
-    titleLabel.layer.shadowOffset = .zero
-    titleLabel.layer.shadowRadius = 2.0
-    titleLabel.layer.shadowOpacity = 1.0
-    titleLabel.layer.masksToBounds = false
-    titleLabel.layer.shouldRasterize = true
-    titleLabel.font = UIFont(name: K.Fonts.retroGaming, size: 46.0)
-    
-    // Change from white to black
-    totalScoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 22)
-    totalScoreLabel.textColor = UIColor.black
-    
-    let buttons: [UIButton] = [playBtn, settingsBtn, howToPlayBtn, leaderboardBtn]
-    
-    buttons.forEach { button in
-        button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
+    private func formatUI() {
+        view.backgroundColor = UIColor(named: K.Colours.bgColour)
+        
         // Change from white to black
-        button.setTitleColor(UIColor.black, for: .normal)
+        titleLabel.textColor = UIColor.black
+        titleLabel.layer.shadowColor = UIColor.lightGray.cgColor // Changed shadow color for better visibility
+        titleLabel.layer.shadowOffset = .zero
+        titleLabel.layer.shadowRadius = 2.0
+        titleLabel.layer.shadowOpacity = 1.0
+        titleLabel.layer.masksToBounds = false
+        titleLabel.layer.shouldRasterize = true
+        titleLabel.font = UIFont(name: K.Fonts.retroGaming, size: 46.0)
+        
+        // Change from white to black
+        totalScoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 22)
+        totalScoreLabel.textColor = UIColor.black
+        
+        let buttons: [UIButton] = [playBtn, settingsBtn, howToPlayBtn, leaderboardBtn]
+        
+        buttons.forEach { button in
+            button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
+            // Change from white to black
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
     }
 }
