@@ -74,7 +74,9 @@ class GameViewController: UIViewController, GameProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.edgesForExtendedLayout = .all
+        self.extendedLayoutIncludesOpaqueBars = true
+
         setupBackgroundImage()
         
         title = K.appName

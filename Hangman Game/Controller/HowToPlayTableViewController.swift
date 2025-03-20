@@ -24,6 +24,9 @@ class HowToPlayTableViewController: UITableViewController {
         
         // Setup the background first
         setupBackgroundImage()
+        self.edgesForExtendedLayout = .all
+        self.extendedLayoutIncludesOpaqueBars = true
+
         
         // Configure table view for visibility
         tableView.backgroundColor = UIColor.clear
@@ -58,8 +61,8 @@ class HowToPlayTableViewController: UITableViewController {
         cell.backgroundColor = UIColor.white.withAlphaComponent(0.8)
         
         // Configure fonts
-        cell.textLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0) ?? UIFont.boldSystemFont(of: 20.0)
-        cell.detailTextLabel?.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0) ?? UIFont.systemFont(of: 20.0)
+        cell.textLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0) ?? UIFont.boldSystemFont(ofSize: 20.0)
+        cell.detailTextLabel?.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0) ?? UIFont.systemFont(ofSize: 20.0)
         
         // Set text color to black for visibility
         cell.textLabel?.textColor = UIColor.black
@@ -88,37 +91,15 @@ class HowToPlayTableViewController: UITableViewController {
     }
     
     private func setupBackgroundImage() {
-        // Remove any existing background
-        for subview in view.subviews {
-            if subview is UIImageView {
-                subview.removeFromSuperview()
-            }
-        }
-        
-        // Create background image view with proper size
-        backgroundImageView = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImageView = UIImageView()
         backgroundImageView.contentMode = .scaleAspectFill
-        
         if let image = UIImage(named: "game_background") {
             backgroundImageView.image = image
         } else if let image = UIImage(named: "Background") {
             backgroundImageView.image = image
         }
-        
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        
-        // Insert background at index 0 to ensure it's behind the table view
-        view.insertSubview(backgroundImageView, at: 0)
-        
-        // Make sure background doesn't intercept touches
-        backgroundImageView.isUserInteractionEnabled = false
-        
-        // Set constraints to cover full screen
-        NSLayoutConstraint.activate([
-            backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        // Instead of adding it as a subview, assign it as the backgroundView:
+        tableView.backgroundView = backgroundImageView
     }
+
 }
