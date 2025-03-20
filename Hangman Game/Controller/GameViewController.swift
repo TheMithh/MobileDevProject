@@ -219,44 +219,58 @@ class GameViewController: UIViewController, GameProtocol {
 
     
     private func setupBackgroundImage() {
-        // Remove existing background view if any
-        backgroundImageView?.removeFromSuperview()
+        // Remove all existing backgrounds to avoid overlapping issues
+        for subview in view.subviews {
+            if subview is UIImageView && subview != hangmanImgView {
+                subview.removeFromSuperview()
+            }
+        }
         
-        // Create background image view that covers entire screen
+        // Create a fresh background from scratch
         backgroundImageView = UIImageView()
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.contentMode = .scaleAspectFill
         
-        // Try different image options
+        // Try to load background image
         if let image = UIImage(named: "Background") {
             backgroundImageView.image = image
         } else if let image = UIImage(named: "game_background") {
             backgroundImageView.image = image
         } else {
-            print("Warning: No background image found!")
+            print("⚠️ No background image found")
             backgroundImageView.backgroundColor = UIColor.lightGray
         }
         
-        // Insert at the back (index 0)
-        view.insertSubview(backgroundImageView, at: 0)
-        
-        // Important: make sure background doesn't intercept touches
+        // Configure background view
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.isUserInteractionEnabled = false
         
-        // Extend beyond safe area to cover entire screen
+        // Insert at the very bottom of the view hierarchy
+        view.insertSubview(backgroundImageView, at: 0)
+        
+        // Use constraints tied to the main view, not safe area
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        // Make sure other UI elements are above the background
-        view.sendSubviewToBack(backgroundImageView)
+        // Force layout update
+        view.layoutIfNeeded()
         
-        // Ensure all UI text elements have their backgrounds set to clear
+        // Set clear backgrounds on UI elements so they don't block the background
         wordLabel.backgroundColor = UIColor.clear
         guessesRemainingLabel.backgroundColor = UIColor.clear
-        // Leave scoreLabel with its background color for visibility
+        
+        // Make sure UI elements are brought to front
+        view.bringSubviewToFront(hangmanImgView)
+        view.bringSubviewToFront(scoreLabel)
+        view.bringSubviewToFront(wordLabel)
+        view.bringSubviewToFront(guessesRemainingLabel)
+        
+        // Bring buttons to front
+        for button in letterButtons {
+            view.bringSubviewToFront(button)
+        }
     }
 }
