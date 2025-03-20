@@ -38,7 +38,15 @@ class GameViewController: UIViewController, GameProtocol {
     
     var hangmanImgNumber = 0 {
         didSet {
-            hangmanImgView.image = UIImage(named: "\(K.hangmanImg)\(hangmanImgNumber)")
+            // Ensure our image number stays within bounds (0-10)
+            hangmanImgNumber = max(0, min(hangmanImgNumber, 10))
+            
+            if let hangmanImage = UIImage(named: "\(K.hangmanImg)\(hangmanImgNumber)") {
+                // Apply a black tint to the image
+                let tintedImage = hangmanImage.withRenderingMode(.alwaysTemplate)
+                hangmanImgView.image = tintedImage
+                hangmanImgView.tintColor = UIColor.black
+            }
         }
     }
     
@@ -87,10 +95,7 @@ class GameViewController: UIViewController, GameProtocol {
         showAlertAction(title: "🕵️", message: "This is a prototype version. Clues would appear here in the full game!", actionClosure: {})
     }
     
-    
     @IBAction func letterTapped(_ sender: UIButton) {
-        print("Letter tapped: \(sender.currentTitle ?? "unknown")")  // Add this debug line
-        
         guard let letterChosen = sender.currentTitle?.lowercased() else { return }
         
         usedLetters.append(letterChosen)
@@ -108,6 +113,16 @@ class GameViewController: UIViewController, GameProtocol {
             Vibration.success.vibrate()
             playSound(sound: K.Audio.correctAnswerSound)
             
+            // Check if word is complete
+            if !maskedWordArray.contains("?") {
+                // Word complete - show success message
+                gameFinishedAlert(title: "You won! 🎉", message: "Congratulations! You guessed the word correctly.", word: word, actionTitle: "New Word") {
+                    self.loadWord()
+                    self.enableAllButtons()
+                }
+                score += 5  // Give bonus points for completing the word
+            }
+            
         } else {
             // For letters not in the word, show incorrect guess
             hangmanImgNumber += 1
@@ -115,14 +130,27 @@ class GameViewController: UIViewController, GameProtocol {
             
             Vibration.error.vibrate()
             playSound(sound: K.Audio.wrongAnswerSound)
+            
+            // Check if game is over (no lives left)
+            if livesRemaining <= 0 {
+                gameFinishedAlert(title: "Game Over ☠️", message: "Sorry, you've run out of lives. The word was '\(word)'.", word: word, actionTitle: "Try Again") {
+                    self.loadWord()
+                    self.enableAllButtons()
+                }
+            }
         }
         
         sender.isEnabled = false
         sender.setTitleColor(UIColor(named: K.Colours.buttonColour), for: .disabled)
         wordLabel.text = maskedWord
-        
-        // For debugging
-        print("Updated masked word: \(maskedWord)")
+    }
+
+    // Add this helper method to re-enable all buttons for a new game
+    func enableAllButtons() {
+        for button in letterButtons {
+            button.isEnabled = true
+            button.setTitleColor(UIColor.black, for: .normal)
+        }
     }
     
     
@@ -162,27 +190,32 @@ class GameViewController: UIViewController, GameProtocol {
     func submitScore(_ playerScore: Int) {
         // Disabled for prototype
     }
-    
+        
     private func formatUI(){
-    view.backgroundColor = UIColor(named: K.Colours.bgColour)
-    
-    hangmanImgView.image = UIImage(named: "\(K.hangmanImg)\(hangmanImgNumber)")
-    scoreLabel.text = "0 points"
-    scoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
-    scoreLabel.textColor = UIColor.black // Changed to black
-    scoreLabel.backgroundColor = UIColor(named: K.Colours.highlightColour)
-    guessesRemainingLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
-    guessesRemainingLabel.textColor = UIColor.black // Changed to black
-    wordLabel.font = UIFont(name: K.Fonts.retroGaming, size: 36.0)
-    wordLabel.textColor = UIColor.black // Added to ensure word is black
-    
-    for button in letterButtons {
-        button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 24.0)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.isEnabled = true  // Explicitly enable the buttons
-        button.alpha = 1.0  // Make sure they're fully visible
+        view.backgroundColor = UIColor(named: K.Colours.bgColour)
+        
+        // Set hangman image with black tint
+        hangmanImgView.image = UIImage(named: "\(K.hangmanImg)\(hangmanImgNumber)")?.withRenderingMode(.alwaysTemplate)
+        hangmanImgView.tintColor = UIColor.black
+        
+        scoreLabel.text = "0 points"
+        scoreLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
+        scoreLabel.textColor = UIColor.black
+        scoreLabel.backgroundColor = UIColor(named: K.Colours.highlightColour)
+        
+        guessesRemainingLabel.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
+        guessesRemainingLabel.textColor = UIColor.black
+        
+        wordLabel.font = UIFont(name: K.Fonts.retroGaming, size: 36.0)
+        wordLabel.textColor = UIColor.black
+        
+        for button in letterButtons {
+            button.titleLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 24.0)
+            button.setTitleColor(UIColor.black, for: .normal)
+            button.isEnabled = true
+            button.alpha = 1.0
+        }
     }
-}
 
     
     private func setupBackgroundImage() {
@@ -193,8 +226,8 @@ class GameViewController: UIViewController, GameProtocol {
         if let image = UIImage(named: "game_background") {
             backgroundImageView.image = image
         } else {
-            print("Warning: game_background image not found")
-            backgroundImageView.backgroundColor = UIColor.lightGray
+            // Try Background as a fallback
+            backgroundImageView.image = UIImage(named: "Background")
         }
         
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
