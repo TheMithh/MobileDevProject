@@ -14,7 +14,15 @@ class HowToPlayTableViewController: UITableViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.title = "PROTOTYPE: \(K.howTopPlayVCName)"
-        view.backgroundColor = UIColor(named: K.Colours.bgColour)
+        view.backgroundColor = UIColor.clear // Changed from specific color to clear
+        
+        // Make sure table view is properly configured
+        tableView.backgroundColor = UIColor.clear
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.black.withAlphaComponent(0.3)
+        
+        // Force reload to ensure cells are visible
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -40,21 +48,46 @@ class HowToPlayTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: K.rulesCellName, for: indexPath)
         
+        // Configure cell appearance for better visibility over background
+        cell.backgroundColor = UIColor.white.withAlphaComponent(0.7) // Semi-transparent white background
+        
+        // Configure text appearance
         cell.textLabel?.font = UIFont(name: K.Fonts.retroGaming, size: 20.0)
         cell.detailTextLabel?.font = UIFont(name: K.Fonts.rainyHearts, size: 20.0)
         cell.textLabel?.textColor = UIColor.black
         cell.detailTextLabel?.textColor = UIColor.black
         
-        // Make cell background transparent
-        cell.backgroundColor = UIColor.clear
+        // Ensure text labels are visible
+        cell.textLabel?.backgroundColor = UIColor.clear
+        cell.detailTextLabel?.backgroundColor = UIColor.clear
         
+        // Set content
         cell.textLabel?.text = rulesTitle[indexPath.row]
         cell.detailTextLabel?.text = rules[indexPath.row]
+        
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // Add some styling to make cells stand out against background
+        cell.layer.masksToBounds = true
+        cell.layer.cornerRadius = 8
+        cell.selectionStyle = .none // Remove selection highlight
+        
+        // Add some padding around cell content
+        cell.contentView.layoutMargins = UIEdgeInsets(top: 10, left: 15, bottom: 10, right: 15)
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension // Automatically adjust based on content
+    }
+    
+    override func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100 // Estimated height
     }
     
     @objc func goToGameScreen() {
@@ -88,6 +121,4 @@ class HowToPlayTableViewController: UITableViewController {
             backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
-
-
 }

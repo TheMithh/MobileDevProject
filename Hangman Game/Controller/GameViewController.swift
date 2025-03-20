@@ -219,29 +219,44 @@ class GameViewController: UIViewController, GameProtocol {
 
     
     private func setupBackgroundImage() {
-        // Create background image view
-        backgroundImageView = UIImageView(frame: view.bounds)
+        // Remove existing background view if any
+        backgroundImageView?.removeFromSuperview()
+        
+        // Create background image view that covers entire screen
+        backgroundImageView = UIImageView()
+        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         backgroundImageView.contentMode = .scaleAspectFill
         
-        if let image = UIImage(named: "game_background") {
+        // Try different image options
+        if let image = UIImage(named: "Background") {
+            backgroundImageView.image = image
+        } else if let image = UIImage(named: "game_background") {
             backgroundImageView.image = image
         } else {
-            // Try Background as a fallback
-            backgroundImageView.image = UIImage(named: "Background")
+            print("Warning: No background image found!")
+            backgroundImageView.backgroundColor = UIColor.lightGray
         }
         
-        backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.insertSubview(backgroundImageView, at: 0) // Add at the back
+        // Insert at the back (index 0)
+        view.insertSubview(backgroundImageView, at: 0)
         
         // Important: make sure background doesn't intercept touches
         backgroundImageView.isUserInteractionEnabled = false
         
-        // Set constraints
+        // Extend beyond safe area to cover entire screen
         NSLayoutConstraint.activate([
             backgroundImageView.topAnchor.constraint(equalTo: view.topAnchor),
+            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
             backgroundImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            backgroundImageView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            backgroundImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
+        
+        // Make sure other UI elements are above the background
+        view.sendSubviewToBack(backgroundImageView)
+        
+        // Ensure all UI text elements have their backgrounds set to clear
+        wordLabel.backgroundColor = UIColor.clear
+        guessesRemainingLabel.backgroundColor = UIColor.clear
+        // Leave scoreLabel with its background color for visibility
     }
 }

@@ -25,15 +25,13 @@ extension GameViewController {
             
             let ac = UIAlertController(title: title, message: message, preferredStyle: .alert)
             
-            ac.addAction(UIAlertAction(title: "Define word", style: .default, handler: { (UIAlertAction) in
-                
-                if UIReferenceLibraryViewController.dictionaryHasDefinition(forTerm: word) {
-                    let ref: UIReferenceLibraryViewController = UIReferenceLibraryViewController(term: word)
-                    self?.present(ref, animated: true, completion: nil)
-                }
+            ac.addAction(UIAlertAction(title: "New Game", style: .default, handler: { (UIAlertAction) in
                 actionClosure()
             }))
-            ac.addAction(UIAlertAction(title: actionTitle, style: .default, handler: {(action: UIAlertAction!) in actionClosure()}))
+            
+            ac.addAction(UIAlertAction(title: "Back to Menu", style: .default, handler: { [weak self] (UIAlertAction) in
+                self?.navigationController?.popToRootViewController(animated: true)
+            }))
             
             ac.formatUI()
             
