@@ -3,6 +3,8 @@
 //  Hangman Game
 
 
+
+
 import UIKit
 import AVFoundation
 import GameKit
@@ -94,7 +96,7 @@ class WelcomeViewController: UIViewController {
         // Create background image view
         backgroundImageView = UIImageView(frame: view.bounds)
         backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.image = UIImage(named: "game_background") // Replace with your image name
+        backgroundImageView.image = UIImage(named: "game_background")
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(backgroundImageView, at: 0) // Add at the back
         
