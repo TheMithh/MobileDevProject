@@ -3,13 +3,17 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		007B9594267FA31700B46AAD /* Vibrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 007B9593267FA31700B46AAD /* Vibrations.swift */; };
 		007B9597267FB8AC00B46AAD /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 007B9596267FB8AC00B46AAD /* GameKit.framework */; };
 		00C392E3268129E4004F29A6 /* GameCenterID.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00C392E2268129E4004F29A6 /* GameCenterID.swift */; };
+		122FFC4C2DADC9BD002AB84A /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = 122FFC4B2DADC9BD002AB84A /* words.txt */; };
+		1297E0EA2DAD673900A9BBE2 /*  LevelSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297E0E92DAD673900A9BBE2 /*  LevelSelectViewController.swift */; };
+		1297E0F42DAD68F000A9BBE2 /* DifficultyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297E0F32DAD68F000A9BBE2 /* DifficultyManager.swift */; };
+		1297E11A2DADB42500A9BBE2 /* DifficultyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1297E1192DADB42500A9BBE2 /* DifficultyViewController.swift */; };
 		1428EA4224885414003A0D7F /* rainyhearts.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1428EA4124885413003A0D7F /* rainyhearts.ttf */; };
 		1434DB582487172100666428 /* RetroGaming.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1434DB572487172100666428 /* RetroGaming.ttf */; };
 		14411B95243F0D670011B085 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14411B94243F0D670011B085 /* AppDelegate.swift */; };
@@ -33,10 +37,40 @@
 		14DBFDA024517D5800ECDD2D /* MusicPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 14DBFD9F24517D5800ECDD2D /* MusicPlayer.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		1297E1032DAD7CBD00A9BBE2 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = file.rcproject;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# rctool\n";
+		};
+		1297E1042DAD7CD500A9BBE2 /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = file.rcproject;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# rctool\n";
+		};
+/* End PBXBuildRule section */
+
 /* Begin PBXFileReference section */
 		007B9593267FA31700B46AAD /* Vibrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vibrations.swift; sourceTree = "<group>"; };
 		007B9596267FB8AC00B46AAD /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
 		00C392E2268129E4004F29A6 /* GameCenterID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameCenterID.swift; sourceTree = "<group>"; };
+		122FFC4B2DADC9BD002AB84A /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = words.txt; path = "../../../../Downloads/Hangman-Game-master 2/Hangman Game/Model/words.txt"; sourceTree = "<group>"; };
+		12851F092DA9F7CB00514D76 /* Hangman Game.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Hangman Game.entitlements"; sourceTree = "<group>"; };
+		1297E0E92DAD673900A9BBE2 /*  LevelSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " LevelSelectViewController.swift"; sourceTree = "<group>"; };
+		1297E0F32DAD68F000A9BBE2 /* DifficultyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DifficultyManager.swift; path = ../../../DifficultyManager.swift; sourceTree = "<group>"; };
+		1297E1192DADB42500A9BBE2 /* DifficultyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyViewController.swift; sourceTree = "<group>"; };
 		1428EA4124885413003A0D7F /* rainyhearts.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = rainyhearts.ttf; sourceTree = "<group>"; };
 		1434DB572487172100666428 /* RetroGaming.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = RetroGaming.ttf; sourceTree = "<group>"; };
 		14411B91243F0D670011B085 /* Hangman Game.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hangman Game.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -121,6 +155,7 @@
 		14411B93243F0D670011B085 /* Hangman Game */ = {
 			isa = PBXGroup;
 			children = (
+				12851F092DA9F7CB00514D76 /* Hangman Game.entitlements */,
 				14F902782446FB10008F0579 /* Model */,
 				14F902772446FB00008F0579 /* View */,
 				14F902762446FAE6008F0579 /* Controller */,
@@ -172,6 +207,8 @@
 				14411B98243F0D670011B085 /* GameViewController.swift */,
 				1454E6F5244EEC0A00B5F2BD /* HowToPlayTableViewController.swift */,
 				1454E6F724503B7600B5F2BD /* SettingsViewController.swift */,
+				1297E0E92DAD673900A9BBE2 /*  LevelSelectViewController.swift */,
+				1297E1192DADB42500A9BBE2 /* DifficultyViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -188,8 +225,10 @@
 		14F902782446FB10008F0579 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				1297E0F32DAD68F000A9BBE2 /* DifficultyManager.swift */,
 				1473F3F12454C4870048A423 /* RulesData.swift */,
 				1451FC2525A8909700FB7A42 /* GameDataManager.swift */,
+				122FFC4B2DADC9BD002AB84A /* words.txt */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -206,6 +245,8 @@
 				14411B8F243F0D670011B085 /* Resources */,
 			);
 			buildRules = (
+				1297E1042DAD7CD500A9BBE2 /* PBXBuildRule */,
+				1297E1032DAD7CBD00A9BBE2 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -220,8 +261,9 @@
 		14411B89243F0D670011B085 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1250;
+				LastUpgradeCheck = 1500;
 				ORGANIZATIONNAME = "Ben Clarke";
 				TargetAttributes = {
 					14411B90243F0D670011B085 = {
@@ -261,6 +303,7 @@
 				149DC72E246B435300803063 /* game-won.wav in Resources */,
 				1428EA4224885414003A0D7F /* rainyhearts.ttf in Resources */,
 				149DC72F246B435300803063 /* wrong-answer.wav in Resources */,
+				122FFC4C2DADC9BD002AB84A /* words.txt in Resources */,
 				149DC730246B435300803063 /* correct-answer.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -276,15 +319,18 @@
 				146F681B244A184200E02E6D /* WelcomeViewController.swift in Sources */,
 				14DBFDA024517D5800ECDD2D /* MusicPlayer.swift in Sources */,
 				00C392E3268129E4004F29A6 /* GameCenterID.swift in Sources */,
+				1297E0F42DAD68F000A9BBE2 /* DifficultyManager.swift in Sources */,
 				1451FC2625A8909700FB7A42 /* GameDataManager.swift in Sources */,
 				007B9594267FA31700B46AAD /* Vibrations.swift in Sources */,
 				14411B95243F0D670011B085 /* AppDelegate.swift in Sources */,
 				14411B97243F0D670011B085 /* SceneDelegate.swift in Sources */,
 				146F681D244A1C4F00E02E6D /* ViewExtensions.swift in Sources */,
 				1454E6F6244EEC0A00B5F2BD /* HowToPlayTableViewController.swift in Sources */,
+				1297E11A2DADB42500A9BBE2 /* DifficultyViewController.swift in Sources */,
 				1486FC9D2449B6CF003FB3B5 /* Constants.swift in Sources */,
 				1454E6F824503B7600B5F2BD /* SettingsViewController.swift in Sources */,
 				1473F3F22454C4870048A423 /* RulesData.swift in Sources */,
+				1297E0EA2DAD673900A9BBE2 /*  LevelSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -314,6 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -347,6 +394,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -375,6 +423,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -408,6 +457,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -430,15 +480,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Hangman Game/Hangman Game.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.1.2;
-				DEVELOPMENT_TEAM = CQLYB77FAP;
+				DEVELOPMENT_TEAM = 8LS34PF4B5;
 				INFOPLIST_FILE = "Hangman Game/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vikingskullapps.Hangman-Word-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.naomi.hangman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -449,15 +500,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Hangman Game/Hangman Game.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.1.2;
-				DEVELOPMENT_TEAM = CQLYB77FAP;
+				DEVELOPMENT_TEAM = 8LS34PF4B5;
 				INFOPLIST_FILE = "Hangman Game/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.vikingskullapps.Hangman-Word-Game";
+				PRODUCT_BUNDLE_IDENTIFIER = com.naomi.hangman;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

@@ -18,7 +18,7 @@ class SettingsViewController: UIViewController {
     
     // Add a background image view property
     private var backgroundImageView: UIImageView!
-    
+      
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationItem.title = K.settingsVCName
@@ -103,3 +103,7 @@ class SettingsViewController: UIViewController {
         ])
     }
 }
+  
+  
+
+

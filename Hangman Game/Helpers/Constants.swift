@@ -12,6 +12,12 @@ struct K {
     static let settingsVCName = "Settings ⚙️"
     static let howTopPlayVCName = "How To Play 🕹"
     
+    
+    // New constants for difficulty and levels
+    static let difficultyKey = "DifficultyKey"
+    static let levelProgressKey = "LevelProgressKey"
+    static let levelSelectSegue = "goToLevelSelect"
+    
     // Hangman image name
     static let hangmanImg = "hangman"
     
@@ -53,6 +59,7 @@ struct K {
         static let fileName = "words"
         static let fileExtension = "txt"
     }
+    
     
     // TableVIew Cells
     static let rulesCellName = "rulesCell"

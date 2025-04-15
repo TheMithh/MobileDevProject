@@ -1,21 +1,36 @@
 //
+
 //  GameManager.swift
 //  Hangman Game
 
-import UIKit
+//
+//  GameManager.swift
+//  Hangman Game
+//
 
-protocol GameProtocol: AnyObject {
+import Foundation
+protocol GameProtocol {
     func gameDataFetched(_ data: [String])
 }
 
 class GameDataManager {
+    var delegate: GameProtocol?
     
-    weak var delegate: GameProtocol?
-    
-    func fetchData() {
-        // Mock data instead of loading from file
-        let mockWords = ["prototype", "design", "mockup", "sample", "demo"]
-        delegate?.gameDataFetched(mockWords)
-        
+    func fetchData(fromFile filename: String = "words") {
+        if let fileURL = Bundle.main.url(forResource: filename, withExtension: "txt") {
+            do {
+                let wordString = try String(contentsOf: fileURL)
+                let words = wordString.components(separatedBy: "\n")
+                delegate?.gameDataFetched(words)
+            } catch {
+                print("Error loading \(filename).txt: \(error)")
+            }
+        } else {
+            print("File \(filename).txt not found")
+            // Fallback to the original words file
+            if filename != "words" {
+                fetchData(fromFile: "words")
+            }
+        }
     }
 }

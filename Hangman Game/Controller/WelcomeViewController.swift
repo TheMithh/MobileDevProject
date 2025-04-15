@@ -3,6 +3,8 @@
 //  Hangman Game
 
 
+
+
 import UIKit
 import AVFoundation
 import GameKit
@@ -26,15 +28,22 @@ class WelcomeViewController: UIViewController {
     
     var reviewPopupShown = false
     
-    var totalScore = 42 { // Fixed mock score for prototype
+    //  var totalScore = 42 { // Fixed mock score for prototype
+    //        didSet {
+    //            totalScoreLabel.text = "Total Points: \(totalScore)"
+    //        }
+    //    }
+    
+    var totalScore = 0 {
         didSet {
             totalScoreLabel.text = "Total Points: \(totalScore)"
         }
     }
     
+    
     var soundFXOn = true
     var buttonClicked = false
-        
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.isNavigationBarHidden = true
@@ -42,8 +51,10 @@ class WelcomeViewController: UIViewController {
         
         buttonClicked = false
         
-        // Fixed score for prototype
-        totalScore = 42
+        //  Fixed score for prototype
+        //  totalScore = 42
+        totalScore = defaults.integer(forKey: K.scoreKey)
+        
     }
     
     override func viewDidLoad() {
@@ -60,8 +71,10 @@ class WelcomeViewController: UIViewController {
             // Set the tint color to black (or another dark color)
             logoImg.tintColor = UIColor.black
         }
+        
+        totalScore = defaults.integer(forKey: K.scoreKey) //initial load
     }
-
+    
     
     override var preferredStatusBarStyle: UIStatusBarStyle  {
         .lightContent
@@ -88,13 +101,13 @@ class WelcomeViewController: UIViewController {
         
         buttonClicked = true
     }
-
-
+    
+    
     private func setupBackgroundImage() {
         // Create background image view
         backgroundImageView = UIImageView(frame: view.bounds)
         backgroundImageView.contentMode = .scaleAspectFill
-        backgroundImageView.image = UIImage(named: "game_background") // Replace with your image name
+        backgroundImageView.image = UIImage(named: "game_background")
         backgroundImageView.translatesAutoresizingMaskIntoConstraints = false
         view.insertSubview(backgroundImageView, at: 0) // Add at the back
         
@@ -120,7 +133,6 @@ class WelcomeViewController: UIViewController {
         }
         
         buttonClicked = true
-        
     }
     
     @IBAction func howToPlayPressed(_ sender: UIButton) {
@@ -191,3 +203,4 @@ class WelcomeViewController: UIViewController {
         }
     }
 }
+
